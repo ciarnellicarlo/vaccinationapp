@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: sans-serif;
+    background-color: #3DED97
 }
 
 .app {
@@ -13,16 +14,34 @@ body {
 .header {
     text-align: center;
     padding: 20px 0;
+    color: white;
+    font-size: 2rem;
 }
 
 .header h1 {
     margin: 0 0 10px 0;
 }
 
-.header select {
-    font-size: 1rem;
+select {
+    border-radius: 10px;
+    outline: none;
+    font-size: 1.5rem;
+    border: none;
+    padding: 5px;
 }
 
 #vaccination {
     text-align: center;
+    color: white;
+    font-size: 1.6rem;
+    flex: 1;
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+#percentage {
+    margin-left: 0.5rem;
 }
