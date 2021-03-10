@@ -22,3 +22,7 @@ body {
 .header select {
     font-size: 1rem;
 }
+
+#vaccination {
+    text-align: center;
+}
