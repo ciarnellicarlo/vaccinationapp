@@ -1,12 +1,23 @@
+//Importing the countries
+
 const start = async () => {
     try {
         const response = await fetch("https://covid.ourworldindata.org/data/owid-covid-data.json");
         const dataBefore = await response.json();
+
+        //Deleting countries that do not have recent data
+
         const dataDelete = await function() {
-            Object.keys(dataBefore).forEach(key => {
-                let dataRemoval = dataBefore[key].data.length - 1;
-                if (!dataBefore[key].data[dataRemoval].people_fully_vaccinated && !dataBefore[key].data[dataRemoval].people_vaccinated) {
-                    delete dataBefore[key]
+            console.log (dataBefore)
+            Object.keys(dataBefore).forEach(item => {
+                if (dataBefore[item].data.length <= 5) {
+                    delete dataBefore[item]
+                }  else {
+                    let checkTodayData = dataBefore[item].data.length - 1;
+                    let checkYesterdayData = dataBefore[item].data.length - 2;
+                    if (!dataBefore[item].data[checkTodayData].people_fully_vaccinated && !dataBefore[item].data[checkTodayData].people_vaccinated && !dataBefore[item].data[checkYesterdayData].people_fully_vaccinated && !dataBefore[item].data[checkYesterdayData].people_vaccinated) {
+                        delete dataBefore[item]
+                    }
                 }
               });
         }
@@ -14,11 +25,14 @@ const start = async () => {
         createCountryList(dataBefore)
         console.log(dataBefore)
     } catch(e) {
-        console.log("Unable to fetch the data.")
+        console.log(e)
     }
+    
 }
 
 start();
+
+//Creating the option list
 
 const createCountryList = countryList => {
 
@@ -32,16 +46,25 @@ const createCountryList = countryList => {
     `
 }
 
+//Importing the data
+
 const getData = async country => {
     if (country != "Choose a country") {
         const response = await fetch("https://covid.ourworldindata.org/data/owid-covid-data.json");
         const data = await response.json();
-        const todayData = (data[country].data.length - 1);
+        let todayData = (data[country].data.length - 1);
         console.log(todayData);
 
         let totalVaccinated = data[country].data[todayData].people_fully_vaccinated
         if (totalVaccinated == undefined) {
-            totalVaccinated = data[country].data[todayData].people_vaccinated;
+            totalVaccinated = data[country].data[todayData].people_vaccinated
+            if (totalVaccinated == undefined) {
+                todayData--;
+                totalVaccinated = data[country].data[todayData].people_fully_vaccinated;
+                if (totalVaccinated == undefined) {
+                    totalVaccinated = data[country].data[todayData].people_vaccinated;
+                }
+            }
         }
 
         let percentageVaccinated = data[country].data[todayData].people_fully_vaccinated_per_hundred
@@ -55,6 +78,8 @@ const getData = async country => {
         showData(totalVaccinated, percentageVaccinated)
     }
 }
+
+//Showing the data
 
 const showData = (totalVaccinated, percentageVaccinated) => {
     document.getElementById("total").innerHTML = totalVaccinated + " People have been vaccinated, which equates to ";
