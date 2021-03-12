@@ -9,6 +9,8 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: column;
+    z-index: 2;
+    position: relative;
 }
 
 .header {
@@ -36,12 +38,28 @@ select {
     font-size: 1.6rem;
     flex: 1;
     align-self: center;
-    display: flex;
+    display: none;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-weight: bold;
+    transition: all 1s ease;
 }
 
 #percentage {
     margin-left: 0.5rem;
+}
+
+span {
+    color: #ed553d
+}
+
+#bar {
+    position: absolute;
+    height: 0;
+    width: 100vw;
+    bottom: 0;
+    background-color: #693ded;
+    z-index: -1;
+    transition: all 1s ease;
 }

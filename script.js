@@ -82,6 +82,8 @@ const getData = async country => {
 //Showing the data
 
 const showData = (totalVaccinated, percentageVaccinated) => {
-    document.getElementById("total").innerHTML = totalVaccinated + " People have been vaccinated, which equates to ";
-    document.getElementById("percentage").innerHTML = percentageVaccinated + "% of the population";
+    document.getElementById("vaccination").style.display = "flex"
+    document.getElementById("total").innerHTML = "<span>" + totalVaccinated + "</span> People have been vaccinated ";
+    document.getElementById("percentage").innerHTML = "which equates to " + "<span>" + percentageVaccinated + "%</span>" + " of the population";
+    document.getElementById("bar").style.height = percentageVaccinated + "vh";
 }
