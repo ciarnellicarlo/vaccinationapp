@@ -40,6 +40,7 @@ body {
     margin: 0 0 10px 0;
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
     user-select: none;
+    padding: 12px;
 }
 
 select {
@@ -64,6 +65,7 @@ select {
     transition: all 1s ease;
     text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
     user-select: none;
+    padding: 12px;
 }
 
 #percentage {
@@ -82,4 +84,18 @@ span {
     background-color: #693ded;
     z-index: -1;
     transition: all 1s ease;
+}
+
+@media screen and (max-width: 500px) {
+    .header h1 {
+        font-size: 2.5rem;
+    }
+
+    select {
+        font-size: 1.2rem;
+    }
+
+    #vaccination {
+        font-size: 1.2rem;
+    }
 }
